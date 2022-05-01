@@ -11,4 +11,10 @@ A Django to-do list webapp deployed on Microsoft Azure platform had been running
 7. This was a single person team therefore no further escalation was done and I took it upon myself to sort out the issue by upgrading my subscription.
 
 ## Conclusion
-In summary, the issue that led to a `HTTP 403 error` was restricted access due to an unpaid bill. It actually seems to be a more common issue than usual with there being various reasons this authorization issue may happen, may be due to credit expiration, reaching spending limit, the bill being past due, bill exceeding credit card limit or the subscription may have been accidentally cancelled by a user.
+In summary, the issue that led to a `HTTP 403 error` was restricted access due to an expired free tier subsciption. 
+It actually seems to be a common authorization issue with there being various reasons this it may happen; 
+- It may be due to credit expiration
+- Reaching spending limit for a given amount of time
+- The bill may be past due
+- The bill may be exceeding the credit card limit
+- Or the subscription may have been accidentally cancelled by a user.
