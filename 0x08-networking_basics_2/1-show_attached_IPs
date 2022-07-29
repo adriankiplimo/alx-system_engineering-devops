@@ -5,10 +5,10 @@
 ip_addresses=$(hostname -I)
 
 # splitting them by space
-ip_addresses=(${ip_addresses//" "/ })
+ip_addresses=("${ip_addresses//' '/ }")
 
 # Print each ip address line by line
 for ip in "${ip_addresses[@]}";
 do
-  printf "$ip\n"
+  printf "%s\n", "$ip"
 done
