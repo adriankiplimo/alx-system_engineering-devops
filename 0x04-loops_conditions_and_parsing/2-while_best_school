@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-# This script is displaying "Best School" 10 times, You must use the while loop (for and until are forbidden)
-while ((i < 10))
-do
-    echo "Best School"
-    let i++
-done
