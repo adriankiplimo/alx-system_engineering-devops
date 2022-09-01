@@ -1,1 +1,0 @@
-This directory contains information on Shell, init files, variables and expansions
