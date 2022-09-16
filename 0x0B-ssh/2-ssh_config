@@ -1,0 +1,7 @@
+# SSH Client Configuration file that connects to a server without a password
+#
+Host web-01
+	HostName 3.236.102.171
+	User ubuntu
+	PasswordAuthentication no
+	IdentityFile ~/.ssh/school
