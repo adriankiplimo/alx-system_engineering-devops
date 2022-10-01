@@ -1,23 +1,41 @@
 global
-        log /dev/log    local0
-	stats socket /run/haproxy/admin.sock mode 660 level admin
+    maxconn 2048
+    tune.ssl.default-dh-param 2048
 
 defaults
-        log     global
-        mode    http
-        option  httplog
-	timeout connect  10s
-	timeout client  30s
-	timeout server  30s
+    mode http
+    timeout client 15s
+    timeout connect 10s
+    timeout server 15s
+    timeout http-request 10s
+    option forwardfor
+    option http-server-close
 
 frontend abracodea-frontend
-	bind *:80
-	bind *:443 ssl crt /etc/haproxy/certs/abracodea.tech.pem
-	http-request redirect scheme https unless { ssl_fc }
-	http-request set-header X-Forwarded-Proto https
-	default_backend abracodea-backend
+    bind *:80
+    default_backend abracodea-backend
+
+frontend www-http
+    bind *:80
+    http-request add-header X-Forwarded-Proto http
+    default_backend www-backend
+
+frontend www-https
+    bind *:443 ssl crt /etc/haproxy/certs/www.abracodea.tech.pem
+    http-request add-header X-Forwarded-Proto https
+    acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+    use_backend letsencrypt-backend if letsencrypt-acl
+    default_backend www-backend
 
 backend abracodea-backend
-	balance roundrobin
-	server 1378-web-01 3.236.102.171:80 check
-	server 1378-web-02 35.174.62.188:80 check
+    balance roundrobin
+    server 1378-web-01 3.236.102.171:80 check
+    server 1378-web-02 35.174.62.188:80 check
+
+backend www-backend
+    redirect scheme https if !{ ssl_fc }
+    server 1378-web-01 3.236.102.171:80 check
+    server 1378-web-02 35.174.62.188:80 check
+
+backend letsencrypt-backend
+    server letsencrypt 127.0.0.1:54321
