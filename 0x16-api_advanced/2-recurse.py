@@ -15,7 +15,7 @@ def recurse(subreddit, hot_list=[], after=None):
     url = requests.get('http://www.reddit.com/r/{}/hot.json'.format(subreddit),
                        headers={'User-Agent': 'Python/requests:APIproject:\
                        v1.0.0 (by /u/abukiplimo)'},
-                     params={'after': after}).json()
+                       params={'after': after}).json()
     after = url.get('data', {}).get('after', None)
     posts = url.get('data', {}).get('children', None)
     if posts is None or (len(posts) > 0 and posts[0].get('kind') != 't3'):
