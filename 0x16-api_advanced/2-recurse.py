@@ -8,12 +8,13 @@ import requests
 
 
 def recurse(subreddit, hot_list=[], after=None):
-    """returns a list containing the titles of all hot articles for a given subreddit"""
+    """returns a list containing the titles of
+    all hot articles for a given subreddit"""
     if subreddit is None or type(subreddit) is not str:
         return None
     url = requests.get('http://www.reddit.com/r/{}/hot.json'.format(subreddit),
-                     headers={'User-Agent': 'Python/requests:APIproject:\
-                     v1.0.0 (by /u/abukiplimo)'},
+                       headers={'User-Agent': 'Python/requests:APIproject:\
+                       v1.0.0 (by /u/abukiplimo)'},
                      params={'after': after}).json()
     after = url.get('data', {}).get('after', None)
     posts = url.get('data', {}).get('children', None)
