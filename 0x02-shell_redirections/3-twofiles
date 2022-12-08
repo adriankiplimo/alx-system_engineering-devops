@@ -1,3 +1,2 @@
 #!/bin/bash
-cat /etc/passwd
-cat /etc/hosts
+sudo less /etc/passwd /etc/hosts
