@@ -1,3 +1,2 @@
 #!/bin/bash
-head /etc/passwd
-printf "\n"
+sudo head -10 /etc/passwd
