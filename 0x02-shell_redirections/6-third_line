@@ -1,3 +1,2 @@
 #!/bin/bash
-awk 'NR==3' iacta
-printf "\n"
+sudo head -3 ./iacta | tail +3
